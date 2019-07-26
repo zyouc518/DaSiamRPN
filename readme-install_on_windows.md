@@ -29,7 +29,7 @@ Open powershell and type the following commands to use Pip to install numpy and 
 python -m pip install opencv-python
 ```
 
-## Install utilities for smooth downloading 
+## Install utilities for downloading datasets
 Due to Windows doesn't have ``git``, ``xargs``, ``sed`` and ``wget`` commands, please visit GnuWin and download them. 
 Click http://gnuwin32.sourceforge.net/downlinks/sed.php to download ``sed``. 
 Click http://gnuwin32.sourceforge.net/downlinks/wget.php to download ``wget``. 
