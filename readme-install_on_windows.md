@@ -29,6 +29,20 @@ Open powershell and type the following commands to use Pip to install numpy and 
 python -m pip install opencv-python
 ```
 
+## Install utilities for smooth downloading 
+Due to Windows doesn't have ``git``, ``xargs``, ``sed`` and ``wget`` commands, please visit GnuWin and download them. 
+Click http://gnuwin32.sourceforge.net/downlinks/sed.php to download ``sed``. 
+Click http://gnuwin32.sourceforge.net/downlinks/wget.php to download ``wget``. 
+And add ``wget`` to PATH by opening a cmd and type: 
+```
+set PATH=%PATH%;C:\Program Files (x86)\GnuWin32%\bin
+```
+Visit https://github.com/git-for-windows/git/releases , and select a binary file to install ``git``, and add ``git`` to PATH by typing the following commands in powershell: 
+```
+set PATH=%PATH%;<path\to\Git\usr\bin
+```
+and now you can use ``git`` and ``xargs`` in powershell. 
+
 ## Download the source code and Pre-trained model
 Open powershell in the directory you want the source code be placed in. And type: 
 ```
@@ -39,16 +53,6 @@ cd ./DaSiamRPN
 Visit https://drive.google.com/drive/folders/1BtIkp5pB6aqePQGlMb2_Z7bfPy6XEj6H and download the ``SiamRPNBIG.model``, ``SiamRPNOTB.model``, and ``SiamRPNVOT.model``. Move them into ``DaSiamRPN/code/`` directory. 
 
 ## Download datasets
-### Install utilities for smooth downloading 
-Due to Windows doesn't have ``sed`` and ``wget`` commands, please visit GnuWin and download them. 
-Click http://gnuwin32.sourceforge.net/downlinks/sed.php to download ``sed``. 
-Click http://gnuwin32.sourceforge.net/downlinks/wget.php to download ``wget``. 
-And add ``wget`` to PATH by opening a cmd and type: 
-```
-;%C:\Program Files (x86)\GnuWin32%\bin
-```
-
-### Download training data and groundtruth file
 In the ``DaSiamRPN-master`` directory, open a powershell and type: 
 ```
 cd code
@@ -56,8 +60,14 @@ mkdir OTB2015
 cd OTB2015
 wget "http://cvlab.hanyang.ac.kr/tracker_benchmark/datasets.html"
 cat datasets.html | findstr "\.zip" | sed -e 's/\.zip".*/.zip/' | sed -e s'/.*"//' >files.txt
-cat files.txt | xargs -n 1 -P 8 -I {} wget -c "$baseurl/{}"
+cat files.txt | xargs -n 1 -P 8 -I {} wget -c "http://cvlab.hanyang.ac.kr/tracker_benchmark/{}"
 ls *.zip | xargs -n 1 unzip
 rm -r __MACOSX/
 cd ..
+```
+
+## Run a demo
+Type the following command in powershell and you can see the demo. 
+```
+python demo.py
 ```
